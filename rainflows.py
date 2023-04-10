@@ -97,15 +97,9 @@ Sensors = [
     GenerateSensor('Jordan River @ 500 North', 'https://rain-flow.slco.org/sensor/?site_id=92&site=a3b813d4-939e-4d08-bab3-3159107c833a&device_id=2&device=cacc90fd-9e26-418e-a401-0e746a2bb3a4')
 ]
 
-#for S in Sensors:
-#    print(S)
-
-#S = Sensors[0]
-#print(S)
-
 for S in Sensors:
     Flow = GenerateFlowEntry(S)
     print(Flow)
 
-#r = requests.get('https://rain-flow.slco.org/dashboard/?dashboard=16cf9494-0714-4849-9caf-287a94047bd9')
+
 
