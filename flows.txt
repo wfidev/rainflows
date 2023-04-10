@@ -1,0 +1,184 @@
+Mill Creek @ Canyon Mouth
+  Flow        = 9.05 cfs
+  Min         = 2.18 cfs
+  Max         = 9.05 cfs
+  High Water  = 29.00 cfs
+  Flood       = 150.00 cfs
+
+
+Mill Creek @ 460 West
+  Flow        = 20.80 cfs
+  Min         = 18.20 cfs
+  Max         = 50.00 cfs
+  High Water  = 65.00 cfs
+  Flood       = 295.50 cfs
+
+
+Red Butte Creek @ Fort Douglas
+  Flow        = 3.37 cfs
+  Min         = 0.23 cfs
+  Max         = 3.37 cfs
+  High Water  = 0.0
+  Flood       = 0.0
+
+
+Red Butte Creek @ Miller Park
+  Flow        = 4.47 cfs
+  Min         = 1.90 cfs
+  Max         = 11.40 cfs
+  High Water  = 34.00 cfs
+  Flood       = 182.00 cfs
+
+
+Big Cottonwood Creek @ 300 West
+  Flow        = 31.80 cfs
+  Min         = 18.00 cfs
+  Max         = 52.60 cfs
+  High Water  = 238.00 cfs
+  Flood       = 849.70 cfs
+
+
+Big Cottonwood Creek @ Canyon Mouth
+  Flow        = 22.90 cfs
+  Min         = 18.70 cfs
+  Max         = 32.00 cfs
+  High Water  = 264.00 cfs
+  Flood       = 700.60 cfs
+
+
+Big Cottonwood Creek @ Cottonwood Lane
+  Flow        = 24.40 cfs
+  Min         = 3.23 cfs
+  Max         = 24.40 cfs
+  High Water  = 255.00 cfs
+  Flood       = 699.30 cfs
+
+
+Big Cottonwood Creek @ Creekside Park
+  Flow        = 23.10 cfs
+  Min         = 6.82 cfs
+  Max         = 24.90 cfs
+  High Water  = 253.00 cfs
+  Flood       = 699.60 cfs
+
+
+Little Cottonwood Creek @ 300 West
+  Flow        = 16.40 cfs
+  Min         = 5.24 cfs
+  Max         = 60.70 cfs
+  High Water  = 281.00 cfs
+  Flood       = 800.40 cfs
+
+
+Little Cottonwood Creek @ Crestwood Park
+  Flow        = 10.30 cfs
+  Min         = 0.26 cfs
+  Max         = 12.60 cfs
+  High Water  = 260.00 cfs
+  Flood       = 715.00 cfs
+
+
+Little Cottonwood Creek @ Tanners Flat
+  Flow        = 7.20 cfs
+  Min         = 3.93 cfs
+  Max         = 9.52 cfs
+  High Water  = 343.00 cfs
+  Flood       = 492.00 cfs
+
+
+Parleys Creek @ Canyon Mouth
+  Flow        = 111.00 cfs
+  Min         = 78.70 cfs
+  Max         = 134.00 cfs
+  High Water  = 45.00 cfs
+  Flood       = 450.50 cfs
+
+
+Parleys Creek @ Hidden Hollow
+  Flow        = 111.00 cfs
+  Min         = 97.00 cfs
+  Max         = 126.00 cfs
+  High Water  = 0.0
+  Flood       = 0.0
+
+
+Bingham Creek @ Jordan River
+  Flow        = 3.51 cfs
+  Min         = 2.61 cfs
+  Max         = 20.80 cfs
+  High Water  = 49.70 cfs
+  Flood       = 250.00 cfs
+
+
+City Creek @ Memory Grove
+  Flow        = 5.34 cfs
+  Min         = 3.10 cfs
+  Max         = 6.70 cfs
+  High Water  = 35.00 cfs
+  Flood       = 155.40 cfs
+
+
+Emigration Creek @ Canyon Mouth
+  Flow        = 49.30 cfs
+  Min         = 2.66 cfs
+  Max         = 51.30 cfs
+  High Water  = 32.00 cfs
+  Flood       = 120.00 cfs
+
+
+Emigration Creek @ Westminster
+  Flow        = 48.200 cfs
+  Min         = 7.810 cfs
+  Max         = 59.700 cfs
+  High Water  = 34.790 cfs
+  Flood       = 53.370 cfs
+
+
+Midas Creek @ Jordan River 
+  Flow        = 3.45 cfs
+  Min         = 2.43 cfs
+  Max         = 13.00 cfs
+  High Water  = 50.00 cfs
+  Flood       = 120.00 cfs
+
+
+Jordan River Surplus Canal
+  Flow        = 263.00 cfs
+  Min         = 209.00 cfs
+  Max         = 488.00 cfs
+  High Water  = 0.0
+  Flood       = 0.0
+
+
+Jordan River @ 9000 South
+  Flow        = 245.00 cfs
+  Min         = 231.00 cfs
+  Max         = 297.00 cfs
+  High Water  = 367.00 cfs
+  Flood       = 900.00 cfs
+
+
+Jordan River @ 4800 S 
+  Flow        = 231.00 cfs
+  Min         = 82.80 cfs
+  Max         = 384.00 cfs
+  High Water  = 550.00 cfs
+  Flood       = 3,740.00 cfs
+
+
+Jordan River @ 1700 South
+  Flow        = 118.00 cfs
+  Min         = 104.00 cfs
+  Max         = 149.00 cfs
+  High Water  = 0.0
+  Flood       = 0.0
+
+
+Jordan River @ 500 North
+  Flow        = 245.00 cfs
+  Min         = 231.00 cfs
+  Max         = 297.00 cfs
+  High Water  = 367.00 cfs
+  Flood       = 900.00 cfs
+
+
