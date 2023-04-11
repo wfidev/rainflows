@@ -1,5 +1,8 @@
 import requests
 from lxml import html
+import pickle
+import re
+from datetime import date
 
 class FlowEntry:
     def __init__(self):
@@ -9,16 +12,13 @@ class FlowEntry:
         self.max = 0.0
         self.highwater = 0.0
         self.flood = 0.0
+        self.highp = 0.0
+        self.floodp = 0.0
 
     def __repr__(self):
-        print(f'{self.name}')
-        print(f'  Flow        = {self.flow}')
-        print(f'  Min         = {self.min}')
-        print(f'  Max         = {self.max}')
-        print(f'  High Water  = {self.highwater}')
-        print(f'  Flood       = {self.flood}')
-        print('')
-        return ""
+        hiprep = "to" if self.highp < 100.0 else "above"
+        floodprep = "to " if self.floodp < 100.0 else ""
+        return f'{self.name:<45} Flow {self.flow} ({self.min} / {self.max}), ({self.highp:.1f}% {hiprep} high, {self.floodp:.1f}% {floodprep}flooding)'
 
 class FlowSensor:
     def __init__(self):
@@ -60,16 +60,71 @@ def GenerateFlowEntry(FS):
         if doc is not None or len(doc) > 0:
             h4s = doc.xpath('//h4[@class="mb-0"]')
             if h4s:
-                fe.flow = h4s[0].text
-                fe.max  = h4s[1].text
-                fe.min  = h4s[2].text
+                fe.flow = ExtractFloat(h4s[0].text)
+                fe.max  = ExtractFloat(h4s[1].text)
+                fe.min  = ExtractFloat(h4s[2].text)
             spans = doc.xpath('//span[@class="badge badge-inline"]')
             if spans is not None:
                 if len(spans) > 1:
-                    fe.flood = spans[0].text
-                    fe.highwater = spans[1].text
+                    fe.flood = ExtractFloat(spans[0].text)
+                    fe.highwater = ExtractFloat(spans[1].text)
+                    if fe.highwater != 0.0:
+                        fe.highp = (fe.flow / fe.highwater) * 100
+                    if fe.flood != 0.0:
+                        fe.floodp = (fe.flow / fe.flood) * 100
             return fe
     return None
+
+def ExtractFloat(s):
+    if s == 0.0:
+        return 0.0
+    number = re.findall("\d+\.\d+", s)
+    if number is None or len(number) < 1:
+        return 0.0
+    return float(number[0])
+
+def FloodReport(FlowTable):
+    print ()
+    print (f"Flood Report for {date.today().strftime('%B %d, %Y')}")
+    print()
+
+    Flooded = []
+    High = []
+    for f in FlowTable:
+        if f.floodp > 100.0:
+            Flooded.append(f)
+        if f.highp > 100.0:
+            High.append(f)
+    Flooded = sorted(Flooded, key=lambda x: x.floodp, reverse=True)
+    High = sorted(High, key=lambda x: x.floodp, reverse=True)
+
+    FloodCount = len(Flooded)
+    HighCount = len(High)
+    print(f"  There are {FloodCount} flooded streams and {HighCount} streams above the high water mark today")
+    print()
+
+    if FloodCount > 0:
+        print("  Flooded Streams")
+        print("  ---------------")
+        for f in Flooded:
+            print(f"  {f}")
+        print()
+
+    if HighCount > 0:
+        print("  Streams at or above the high water mark")
+        print("  ---------------------------------------")
+        for f in High:
+            print(f"  {f}")
+        print()
+
+    ft = new_list = sorted(FlowTable, key=lambda x: x.floodp, reverse=True)
+    print("  All Streams")
+    print("  -----------")
+    for f in ft:
+        print(f"  {f}")
+    print()
+
+
 
 Sensors = [
     GenerateSensor('Mill Creek @ Canyon Mouth', 'https://rain-flow.slco.org/sensor/?site_id=76&site=3ea01878-b85b-497b-8db5-03654e886f0a&device_id=2&device=a070b1c1-1dd2-47af-b810-f5d5b0d6ba7f'),
@@ -97,9 +152,21 @@ Sensors = [
     GenerateSensor('Jordan River @ 500 North', 'https://rain-flow.slco.org/sensor/?site_id=92&site=a3b813d4-939e-4d08-bab3-3159107c833a&device_id=2&device=cacc90fd-9e26-418e-a401-0e746a2bb3a4')
 ]
 
+# Load in the Flow Table from cache
+#
+# FlowTable = pickle.load(open("FlowTable.db", "rb"))
+# pickle.dump(FlowTable, open("FlowTable.db", "wb"))
+
+FlowTable = []
 for S in Sensors:
     Flow = GenerateFlowEntry(S)
     print(Flow)
+    FlowTable.append(Flow)
+FloodReport(FlowTable)
+
+
+
+
 
 
 
