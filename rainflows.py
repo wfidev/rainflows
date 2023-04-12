@@ -3,6 +3,7 @@ from lxml import html
 import pickle
 import re
 from datetime import date
+import csv
 
 class FlowEntry:
     def __init__(self):
@@ -124,7 +125,12 @@ def FloodReport(FlowTable):
         print(f"  {f}")
     print()
 
-
+def RecordSensorReadings(FlowEntries):
+    Filename = f"Reports/Sensors {date.today()}.csv"
+    with open(Filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        for flow in FlowEntries:
+            writer.writerow([str(date.today()), flow.name, flow.flow, flow.min, flow.max, flow.highwater, flow.flood, flow.highp, flow.floodp])
 
 Sensors = [
     GenerateSensor('Mill Creek @ Canyon Mouth', 'https://rain-flow.slco.org/sensor/?site_id=76&site=3ea01878-b85b-497b-8db5-03654e886f0a&device_id=2&device=a070b1c1-1dd2-47af-b810-f5d5b0d6ba7f'),
@@ -152,10 +158,10 @@ Sensors = [
     GenerateSensor('Jordan River @ 500 North', 'https://rain-flow.slco.org/sensor/?site_id=92&site=a3b813d4-939e-4d08-bab3-3159107c833a&device_id=2&device=cacc90fd-9e26-418e-a401-0e746a2bb3a4')
 ]
 
-# Load in the Flow Table from cache
+# Load in the Flow Table from cache for testing
 #
-# FlowTable = pickle.load(open("FlowTable.db", "rb"))
-# pickle.dump(FlowTable, open("FlowTable.db", "wb"))
+#FlowTable = pickle.load(open("FlowTable.db", "rb"))
+#pickle.dump(FlowTable, open("FlowTable.db", "wb"))
 
 FlowTable = []
 for S in Sensors:
@@ -163,6 +169,7 @@ for S in Sensors:
     print(Flow)
     FlowTable.append(Flow)
 FloodReport(FlowTable)
+RecordSensorReadings(FlowTable)
 
 
 
