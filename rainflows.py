@@ -4,6 +4,7 @@ import pickle
 import re
 from datetime import date
 import csv
+import sys
 
 class FlowEntry:
     def __init__(self):
@@ -84,10 +85,18 @@ def ExtractFloat(s):
         return 0.0
     return float(number[0])
 
+def Output(s):
+    if s is None:
+        print()
+        return ""
+    print(s)
+    return s
+
 def FloodReport(FlowTable):
-    print ()
-    print (f"Flood Report for {date.today().strftime('%B %d, %Y')}")
-    print()
+    Lines = []
+    Lines.append(Output(None))
+    Lines.append(Output(f"Flood Report for {date.today().strftime('%B %d, %Y')}"))
+    Lines.append(Output(None))
 
     Flooded = []
     High = []
@@ -101,29 +110,31 @@ def FloodReport(FlowTable):
 
     FloodCount = len(Flooded)
     HighCount = len(High)
-    print(f"  There are {FloodCount} flooded streams and {HighCount} streams above the high water mark today")
-    print()
+    Lines.append(Output(f"  There are {FloodCount} flooded streams and {HighCount} streams above the high water mark today"))
+    Lines.append(Output(None))
 
     if FloodCount > 0:
-        print("  Flooded Streams")
-        print("  ---------------")
+        Lines.append(Output("  Flooded Streams"))
+        Lines.append(Output("  ---------------"))
         for f in Flooded:
-            print(f"  {f}")
-        print()
+            Lines.append(Output(f"  {f}"))
+        Lines.append(Output(None))
 
     if HighCount > 0:
-        print("  Streams at or above the high water mark")
-        print("  ---------------------------------------")
+        Lines.append(Output("  Streams at or above the high water mark"))
+        Lines.append(Output("  ---------------------------------------"))
         for f in High:
-            print(f"  {f}")
-        print()
+            Lines.append(Output(f"  {f}"))
+        Lines.append(Output(None))
 
     ft = new_list = sorted(FlowTable, key=lambda x: x.floodp, reverse=True)
-    print("  All Streams")
-    print("  -----------")
+    Lines.append(Output("  All Streams"))
+    Lines.append(Output("  -----------"))
     for f in ft:
-        print(f"  {f}")
-    print()
+        Lines.append(Output(f"  {f}"))
+    Lines.append(Output(None))
+
+    return Lines
 
 def RecordSensorReadings(FlowEntries):
     Filename = f"Reports/Sensors {date.today()}.csv"
@@ -158,18 +169,24 @@ Sensors = [
     GenerateSensor('Jordan River @ 500 North', 'https://rain-flow.slco.org/sensor/?site_id=92&site=a3b813d4-939e-4d08-bab3-3159107c833a&device_id=2&device=cacc90fd-9e26-418e-a401-0e746a2bb3a4')
 ]
 
-# Load in the Flow Table from cache for testing
-#
-#FlowTable = pickle.load(open("FlowTable.db", "rb"))
-#pickle.dump(FlowTable, open("FlowTable.db", "wb"))
+def Main(Argv):
+    # Load in the Flow Table from cache for testing
+    #
+    #FlowTable = pickle.load(open("FlowTable.db", "rb"))
+    #pickle.dump(FlowTable, open("FlowTable.db", "wb"))
+    FlowTable = []
+    for S in Sensors:
+        Flow = GenerateFlowEntry(S)
+        print(Flow)
+        FlowTable.append(Flow)
+    FloodReport(FlowTable)
+    RecordSensorReadings(FlowTable)
 
-FlowTable = []
-for S in Sensors:
-    Flow = GenerateFlowEntry(S)
-    print(Flow)
-    FlowTable.append(Flow)
-FloodReport(FlowTable)
-RecordSensorReadings(FlowTable)
+if __name__ == '__main__':
+    Main(sys.argv)
+
+
+
 
 
 
